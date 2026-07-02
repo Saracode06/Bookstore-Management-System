@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login – Book Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e6fa5 0%, #0c5381 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 45px 40px;
+            width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #1e6fa5;
+            margin-bottom: 6px;
+        }
+
+        .logo span { color: #ffd814; }
+
+        .subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 22px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 14px;
+            border: 1.5px solid #dde3ec;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #1a1a2e;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #378dc7;
+            box-shadow: 0 0 0 3px rgba(55,141,199,0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #378dc7, #1e6fa5);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2f78a9, #17568a);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(30,111,165,0.3);
+        }
+
+        .link {
+            display: block;
+            margin-top: 18px;
+            font-size: 13px;
+            color: #378dc7;
+            text-decoration: none;
+        }
+
+        .link:hover { text-decoration: underline; }
+
+        /* Flash messages */
+        .flash {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .flash.error   { background: #fdecea; color: #c0392b; border-left: 4px solid #e74c3c; }
+        .flash.success { background: #eafaf1; color: #1e8449; border-left: 4px solid #2ecc71; }
+        .flash.warning { background: #fef9e7; color: #b7770d; border-left: 4px solid #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">Book<span>Zone</span></div>
+        <div class="subtitle">Your favourite bookstore</div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <h2>Welcome Back 👋</h2>
+
+        <form method="post">
+            <input type="email" name="email" placeholder="Email address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <a class="link" href="/register">New user? Register here →</a>
+    </div>
+</body>
+</html>

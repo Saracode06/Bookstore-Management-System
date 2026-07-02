@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fb;
+            color: #1a1a2e;
+        }
+
+        /* ===== TOP HEADER ===== */
+        .top-header {
+            background: linear-gradient(135deg, #1e6fa5, #378dc7);
+            color: white;
+            padding: 14px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ffd814;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .account img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .account a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .account a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* ===== OFFER STRIP ===== */
+        .offer-strip {
+            background-color: #0c5381;
+            color: #ffd814;
+            padding: 8px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .floating-cart {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 14px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .floating-cart:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        nav {
+            background-color: #2c6ea3;
+            padding: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 15px 28px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.1);
+            border-bottom: 3px solid #ffd814;
+        }
+
+        /* ===== MENU ICON ===== */
+        .menu-icon {
+            font-size: 26px;
+            cursor: pointer;
+            padding: 12px 20px;
+            display: inline-block;
+            color: #378dc7;
+            transition: 0.2s;
+        }
+
+        .menu-icon:hover {
+            color: #1e6fa5;
+        }
+
+        /* ===== SIDE MENU ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a2e, #16213e);
+            color: white;
+            transition: 0.3s ease;
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+        }
+
+        .side-menu .menu-header {
+            padding: 15px 25px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #ffd814;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .side-menu .menu-header a {
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            padding: 0;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 13px 25px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: 0.2s;
+        }
+
+        .side-menu a:hover {
+            background-color: rgba(55, 141, 199, 0.3);
+            color: white;
+            padding-left: 32px;
+        }
+
+        .contact {
+            padding: 20px 25px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            height: 480px;
+            background-image: url("{{ url_for('static', filename='images/books.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,56,99,0.75), rgba(55,141,199,0.5));
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 40px 50px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .hero-text p {
+            font-size: 17px;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            font-weight: 500;
+            margin-bottom: 28px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 13px 34px;
+            background: #ffd814;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: 0.25s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-btn:hover {
+            background: #f0c800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 50px 40px;
+            background: #f4f7fb;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(55,141,199,0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #1e6fa5;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ===== OVERLAY ===== */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .overlay.active { display: block; }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== TOP HEADER ===== -->
+    <div class="top-header">
+        <div class="logo">Book<span>Zone</span></div>
+        <div class="account">
+            <img src="{{ url_for('static', filename='images/accountlogo.jpg') }}" alt="account">
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </div>
+    </div>
+
+    <!-- ===== CART STRIP ===== -->
+    <div class="offer-strip">
+        <a href="/cart" class="floating-cart">🛒 My Cart</a>
+    </div>
+
+    <!-- ===== NAVIGATION BAR ===== -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('genres') }}">Genre</a></li>
+            <li><a href="#">Author</a></li>
+            <li><a href="#">Study Material</a></li>
+            <li><a href="#">Contact</a></li>
+
+        </ul>
+        
+    </nav>
+
+    <!-- ===== MENU ICON ===== -->
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- ===== SIDE MENU ===== -->
+    <div class="side-menu" id="menu">
+        <div class="menu-header">
+            BookZone
+            <a href="#" onclick="closeMenu()">✖</a>
+        </div>
+        <a href="{{ url_for('register') }}">👤 Sign Up / Login</a>
+        <a href="{{ url_for('genres') }}">📚 Genre</a>
+        <a href="#">✍️ Author</a>
+        <a href="#">📖 Study Material</a>
+        <a href="#">📞 Contact</a>
+        <div class="contact">
+            📞 +91 xxxxxxxxxx<br>
+            🌐 Instagram<br>
+            💬 WhatsApp
+        </div>
+    </div>
+
+    <!-- ===== HERO SECTION ===== -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Where Every Book Finds Its Reader</h1>
+            <p>Explore • Learn • Grow</p>
+            <a href="{{ url_for('genres') }}" class="hero-btn">Browse Books</a>
+        </div>
+    </div>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <div class="features">
+        <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>Fast Delivery</h3>
+            <p>Get your books delivered quickly right to your doorstep.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💰</div>
+            <h3>Best Prices</h3>
+            <p>Enjoy unbeatable prices and exclusive discounts on all books.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⭐</div>
+            <h3>Top Rated</h3>
+            <p>Browse books reviewed and rated by thousands of readers.</p>
+        </div>
+    </div>
+
+    <!-- ===== MENU SCRIPT ===== -->
+    <script>
+        function openMenu() {
+            document.getElementById("menu").style.left = "0";
+            document.getElementById("overlay").classList.add("active");
+        }
+
+        function closeMenu() {
+            document.getElementById("menu").style.left = "-300px";
+            document.getElementById("overlay").classList.remove("active");
+        }
+    </script>
+<a href="{{ url_for('login') }}" style="background:#fdecea; color:#e74c3c; border:1px solid #f5c6c2; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">🚪 Logout</a>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>{{ book[0] }}</title>
+</head>
+<body>
+
+<div class="book-detail">
+
+    <img src="{{ url_for('static', filename=book[5]) }}" alt="{{ book[0] }}">
+
+    <div class="book-detail-content">
+        <h1>{{ book[0] }}</h1>
+        <p><strong>Author:</strong> {{ book[1] }}</p>
+        <p><strong>Price:</strong> ₹{{ book[2] }}</p>
+        <p><strong>Description:</strong> {{ book[3] }}</p>
+        <p><strong>Rating:</strong> ⭐ {{ book[4] }}</p>
+
+        <form action="/add_to_cart/{{ book_id }}" method="POST">
+
+<button type="button" onclick="minus()">-</button>
+
+<input type="text" id="qty" name="quantity" value="1" readonly>
+
+<button type="button" onclick="plus()">+</button>
+
+<button type="submit">Add to Cart</button>
+
+</form>
+
+<script>
+function plus(){
+let q=document.getElementById("qty");
+q.value=parseInt(q.value)+1;
+}
+
+function minus(){
+let q=document.getElementById("qty");
+if(q.value>1){
+q.value=parseInt(q.value)-1;
+}
+}
+</script>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="reviews">
+
+<h2>Customer Reviews</h2>
+
+{% for r in reviews %}
+
+<p>⭐ {{ r[0] }} / 5</p>
+<p>{{ r[1] }}</p>
+
+<hr>
+
+{% endfor %}
+
+<h3>Write a Review</h3>
+
+<form action="/add_review/{{ book_id }}" method="POST">
+
+<label>Rating:</label>
+
+<select name="rating">
+<option value="5">5 ⭐</option>
+<option value="4">4 ⭐</option>
+<option value="3">3 ⭐</option>
+<option value="2">2 ⭐</option>
+<option value="1">1 ⭐</option>
+</select>
+
+<br><br>
+
+<textarea name="review" rows="4" cols="40" placeholder="Write your review here"></textarea>
+
+<br><br>
+
+<button type="submit">Submit Review</button>
+
+</form>
+
+</div>
+<button onclick="history.back()">Go Back</button>
+</body>
+</html>

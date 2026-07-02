@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genres</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<form action="/genres" method="GET" style="float:right;">
+<input type="text" name="q" placeholder="Search genre">
+<button type="submit">Search</button>
+</form>
+
+<h1 class="page-title">Browse Genres</h1>
+
+<div class="genre-grid">
+    {% for genre in genres %}
+        <a class="genre-box" href="{{ url_for('books', genre_id=genre[0]) }}">
+            {{ genre[1] }}
+        </a>
+    {% endfor %}
+</div>
+<button onclick="history.back()">Go Back</button>
+
+</body>
+</html>

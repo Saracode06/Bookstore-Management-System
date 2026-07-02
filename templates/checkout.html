@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout – Book Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f4f7fb; }
+
+        .checkout-wrapper {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: #1e6fa5;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .section-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e6fa5;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f4f8;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .order-row:last-child { border-bottom: none; }
+
+        .order-row .qty {
+            background: #f0f4f8;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        /* Payment options */
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border: 2px solid #dde3ec;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .payment-option:hover {
+            border-color: #378dc7;
+            background: #f0f8ff;
+        }
+
+        .payment-option input[type="radio"] {
+            accent-color: #378dc7;
+            width: 16px;
+            height: 16px;
+        }
+
+        .payment-option input[type="radio"]:checked + span {
+            color: #1e6fa5;
+            font-weight: 600;
+        }
+
+        .payment-option:has(input:checked) {
+            border-color: #378dc7;
+            background: #f0f8ff;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #378dc7, #1e6fa5);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .place-order-btn:hover {
+            background: linear-gradient(135deg, #2f78a9, #17568a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30,111,165,0.3);
+        }
+
+        .back-btn {
+            background: none;
+            color: #378dc7;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0 0 20px 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-btn:hover { text-decoration: underline; background: none; }
+    </style>
+</head>
+<body>
+
+<div class="checkout-wrapper">
+
+    <button class="back-btn" onclick="history.back()">← Go Back</button>
+
+    <h1 class="page-title">Checkout</h1>
+
+    <!-- Order Summary -->
+    <div class="section-card">
+        <h3>🧾 Order Summary</h3>
+        {% for item in items %}
+        <div class="order-row">
+            <span>{{ item[0] }} <span class="qty">Qty: {{ item[2] }}</span></span>
+            <strong>₹{{ item[1] * item[2] }}</strong>
+        </div>
+        {% endfor %}
+        <div class="total-row">
+            <span>Total</span>
+            <span>₹{{ total }}</span>
+        </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="section-card">
+        <h3>💳 Select Payment Method</h3>
+        <form action="/place_order" method="POST">
+            <div class="payment-options">
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Credit Card" required>
+                    <span>💳 Credit Card</span>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Debit Card">
+                    <span>🏧 Debit Card</span>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="UPI">
+                    <span>📱 UPI</span>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Cash on Delivery">
+                    <span>💵 Cash on Delivery</span>
+                </label>
+            </div>
+            <br>
+            <button type="submit" class="place-order-btn">Place Order →</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

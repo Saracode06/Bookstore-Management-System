@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<form action="/books" method="GET" style="float:right;">
+<input type="text" name="q" placeholder="Search books">
+<button type="submit">Search</button>
+</form>
+
+
+<div class="book-grid">
+
+    {% for book in books %}
+    <div class="book-card">
+        <a href="{{ url_for('book_detail', book_id=book[0]) }}">
+    <img src="{{ url_for('static', filename=book[5]) }}" alt="{{ book[1] }}" width="150">
+    <h3>{{ book[1] }}</h3>
+    <p>₹{{ book[3] }}</p>
+</a>
+    </div>
+    {% endfor %}
+
+</div>
+<button onclick="history.back()">Go Back</button>
+</body>
+</html>
