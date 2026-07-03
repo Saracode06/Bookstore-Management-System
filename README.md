@@ -102,17 +102,23 @@ python app.py
 
 ---
 
-## Admin Dashboard
+## Admin Dashboard (Book Management)
 
 ![Admin Dashboard](screenshots/admindash.jpg)
 
 ---
 
-## Admin Dashboard (Book Management)
+## Admin Dashboard (View Orders)
 
 ![Admin Dashboard](screenshots/admindash1.jpg)
 
 ---
+
+## Browse by Genre
+
+![Genre](screenshots/genre.jpg)
+
+--
 
 ## Browse Books
 
@@ -124,11 +130,6 @@ python app.py
 
 ![Book Information](screenshots/bookinfo.jpg)
 
----
-
-## Browse by Genre
-
-![Genre](screenshots/genre.jpg)
 
 ---
 
