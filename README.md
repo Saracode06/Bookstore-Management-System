@@ -160,7 +160,7 @@ The project is currently under active development, and additional features and i
 
 **Sara Sayyed**
 
-GitHub: https://github.com/Saracode06
+LinkedIn: (https://www.linkedin.com/in/sara-sayyed-508900324/)
 
 ## ⭐ If you like this project
 
